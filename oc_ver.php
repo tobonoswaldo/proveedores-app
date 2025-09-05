@@ -377,3 +377,4 @@ $bloquearAgregarFacturas = ($oc['estatus'] === 'CERRADA') || ($oc['estado_pago']
 </div>
 </body>
 </html>
+<!-- fin del programa -->
