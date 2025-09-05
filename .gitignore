@@ -1,0 +1,23 @@
+# App
+config.php
+*.env
+.env.*
+/cxp/documentos/
+/vendor/
+/node_modules/
+/tmp/
+/cache/
+/logs/
+
+# SO / IDE
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Backups/archivos grandes
+*.bak
+*.zip
+*.tar.gz
+config.php

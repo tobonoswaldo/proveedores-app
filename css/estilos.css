@@ -1,0 +1,375 @@
+/* ===== Cuerpo del login ===== */
+body.login-page {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #2c3e50, #34495e); /* Fondo degradado */
+    display: flex;             /* Centrado horizontal */
+    align-items: center;        /* Centrado vertical */
+    justify-content: center;    /* Centrado en ambas direcciones */
+    height: 100vh;              /* Pantalla completa */
+    margin: 0;
+}
+
+/* ===== Contenedor principal del login ===== */
+.login-container {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    width: 350px;
+    text-align: center;
+}
+
+/* ===== Icono/avatar del login ===== */
+.avatar {
+    background: #0066cc;
+    color: #fff;
+    font-size: 40px;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    margin: -70px auto 20px auto;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* ===== Título de login ===== */
+.login-container h2 {
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+/* ===== Grupo de inputs con icono ===== */
+.input-group {
+    display: flex;
+    align-items: center;
+    background: #f0f0f0;
+    margin: 12px 0;
+    border-radius: 8px;
+    padding: 10px;
+}
+.input-group i {
+    color: #888;
+    margin-right: 10px;
+}
+.input-group input {
+    border: none;
+    outline: none;
+    background: transparent;
+    flex: 1;
+    font-size: 14px;
+}
+
+/* ===== Opciones extras (recordar, recuperar contraseña) ===== */
+.options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    margin: 10px 0 20px;
+}
+.options a {
+    color: #0066cc;
+    text-decoration: none;
+}
+.options a:hover {
+    text-decoration: underline;
+}
+
+/* ===== Botón de login ===== */
+.login-container button {
+    width: 100%;
+    padding: 12px;
+    background: #0066cc;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.login-container button:hover {
+    background: #004d99;
+}
+
+/* ===== Mensajes de error ===== */
+.error {
+    margin-top: 15px;
+    color: #d9534f;
+    font-size: 13px;
+}
+
+/* ===== Ajuste responsivo para pantallas pequeñas ===== */
+@media (max-width: 400px) {
+    .login-container {
+        width: 90%;
+        padding: 30px 20px;
+    }
+}
+
+/* ===== Cuerpo del dashboard ===== */
+body.dashboard-page {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* ===== Encabezado principal (header) ===== */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #0066cc;
+    color: #fff;
+    padding: 15px 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+/* Logo + icono de menú */
+.menu-logo {
+    display: flex;
+    align-items: center;
+}
+.menu-icon {
+    font-size: 20px;
+    cursor: pointer;
+    margin-right: 15px;
+}
+.logo {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* User info en header */
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.user-info .logout {
+    display: flex;
+    align-items: center;
+    gap: 6px;                /* espacio entre ícono y texto */
+    color: #fff !important;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.user-info .logout span {
+    display: inline-block;
+    color: #fff !important;
+    font-size: 14px;
+}
+
+.user-info .logout:hover {
+    text-decoration: underline;
+}
+
+
+/* aseguramos que el texto se vea */
+.logout-text {
+    display: inline-block;
+    color: #fff !important;  /* 🚀 siempre visible */
+}
+
+/* ===== Sidebar acordeón ===== */
+.sidebar {
+    background: #2c3e50;
+    color: #fff;
+    position: absolute;
+    top: 60px; /* debajo del header */
+    left: 0;
+    display: none;
+    flex-direction: column;
+    z-index: 1000;
+    width: auto;                /* 🚀 Ajusta solo al ancho del contenido */
+    min-width: 180px;           /* Ancho mínimo */
+    max-width: 250px;           /* Ancho máximo (seguridad visual) */
+}
+
+/* Sidebar activo (visible) */
+.sidebar.active {
+    display: flex;
+}
+
+/* Lista de opciones */
+.sidebar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.sidebar ul li {
+    border-bottom: 1px solid #34495e;
+    white-space: nowrap; /* 🚀 Evita saltos de línea */
+}
+/* ===== Asegurar alineación de íconos y texto en el menú ===== */
+.sidebar ul li a {
+    display: flex;              /* 🚀 Usar flexbox */
+    align-items: center;        /* Centrar vertical */
+    gap: 10px;                  /* Espacio entre ícono y texto */
+    padding: 12px 20px;
+    color: #ecf0f1;
+    text-decoration: none;
+    transition: background 0.3s;
+    white-space: nowrap;        /* No partir texto en varias líneas */
+}
+
+.sidebar ul li a:hover {
+    background: #34495e;
+}
+
+
+/* ===== Contenedor principal ===== */
+.content {
+    margin-top: 60px; /* Espacio para header */
+    flex: 1;
+    background: #f3f6f9;
+    padding: 0;
+}
+
+/* Iframe que carga módulos dinámicamente */
+.content iframe {
+    width: 100%;
+    height: calc(100vh - 120px); /* Ajusta a pantalla completa menos header+footer */
+    border: none;
+}
+
+/* ===== Footer ===== */
+.main-footer {
+    background: #0066cc;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+/* ===== Formulario de proveedores (formato login) ===== */
+.form-container {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    width: 450px;
+    margin: 80px auto;
+}
+
+.form-header {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+.styled-form .input-group {
+    display: flex;
+    align-items: center;
+    background: #f0f0f0;
+    margin: 12px 0;
+    border-radius: 8px;
+    padding: 10px;
+}
+.styled-form .input-group i {
+    color: #888;
+    margin-right: 10px;
+}
+.styled-form .input-group input {
+    border: none;
+    outline: none;
+    background: transparent;
+    flex: 1;
+    font-size: 14px;
+}
+
+.styled-form label {
+    display: block;
+    margin-top: 10px;
+    font-weight: 500;
+    color: #2c3e50;
+}
+
+.styled-form input[type="file"] {
+    display: block;
+    margin: 6px 0 12px;
+}
+
+.styled-form button {
+    width: 100%;
+    padding: 12px;
+    background: #0066cc;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 15px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+.styled-form button:hover {
+    background: #004d99;
+}
+
+.btn-nuevo {
+    display: inline-block;
+    background: #28a745;
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+}
+.btn-nuevo:hover {
+    background: #218838;
+}
+
+.btn-editar {
+    display: inline-block;
+    background: #ffc107;
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 6px;
+    text-decoration: none;
+}
+.btn-editar:hover {
+    background: #e0a800;
+}
+
+/* Ícono PDF */
+.pdf-icon {
+    font-size: 18px;
+    color: #dc3545; /* rojo PDF */
+}
+
+/* ===== OC: asociar facturas ===== */
+.wrap { max-width: 1100px; margin: 24px auto; }
+.card { background:#fff; border-radius:10px; padding:16px; box-shadow:0 4px 18px rgba(0,0,0,.08); }
+.toolbar { display:flex; gap:10px; align-items:center; justify-content:space-between; margin:10px 0 16px; }
+.search { max-width:280px; }
+
+.tbl { width:100%; border-collapse:collapse; }
+.tbl th, .tbl td { padding:10px; border-bottom:1px solid #eee; text-align:left; }
+.tbl th { font-weight:600; color:#333; }
+.text-right { text-align:right; }
+.col-select { width:36px; }
+
+.badge { display:inline-block; background:#eef; padding:.15rem .5rem; border-radius:6px; color:#333; }
+
+.btn { display:inline-flex; align-items:center; gap:.5rem; padding:.6rem 1rem; border:0; border-radius:8px; cursor:pointer; text-decoration:none; }
+.btn-primary { background:#2563eb; color:#fff; }
+.btn-outline { background:#fff; border:1px solid #d0d7de; color:#111; }
+.btn-danger { background:#dc2626; color:#fff; }
+
+.alert { margin:12px 0; padding:10px; border-radius:8px; }
+.alert-ok { background:#ecfdf5; color:#065f46; }
+.alert-err { background:#fef2f2; color:#991b1b; }
+.muted { color:#6b7280; }
