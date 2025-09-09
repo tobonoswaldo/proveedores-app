@@ -67,7 +67,10 @@ $stmt->close();
       <div>
         <h2>OC <?= e($oc['folio']) ?> · <?= e($oc['proveedor_rfc']) ?></h2>
         <p>
-          Estatus: <strong><?= e($oc['estatus']) ?></strong> ·
+          Estatus: <strong><?= e($oc['estatus']) ?></strong> 
+          <?php if(!empty($oc['fecha_cancelacion'])): ?>
+            · Cancelada el: <strong><?= e($oc['fecha_cancelacion']) ?></strong>
+          <?php endif; ?> ·
           Pago: <strong><?= e($oc['estado_pago']) ?></strong> ·
           Total: <strong>$<?= n($oc['total']) ?></strong>
         </p>

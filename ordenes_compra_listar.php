@@ -34,8 +34,30 @@ $stmt->close();
 </head><body class="dashboard-page">
 <div class="wrap">
   <div class="toolbar">
-    <a class="btn btn-primary" href="oc_agregar_facturas.php?nueva=1"><i class="fa fa-plus"></i> Nueva orden de compra</a>
-  </div>
+  <?php if (($_SESSION['user_externo'] ?? 'N') === 'S'): ?>
+    <!-- Externo: va directo -->
+    <a class="btn btn-primary" href="oc_agregar_facturas.php?nueva=1">
+      <i class="fa fa-plus"></i> Nueva orden de compra
+    </a>
+  <?php else: ?>
+    <!-- Interno: pide RFC -->
+    <form method="get" action="oc_agregar_facturas.php" class="inline">
+      <input type="hidden" name="nueva" value="1">
+      <label for="rfcProv">RFC proveedor</label>
+      <input id="rfcProv" name="proveedor_rfc" type="text"
+             required maxlength="13"
+             pattern="[A-Z&Ñ]{3,4}\d{6}[A-Z0-9]{3}"
+             oninput="this.value=this.value.toUpperCase().replace(/[^A-Z0-9&Ñ]/g,'');"
+             placeholder="AAAA000000AAA">
+      <button class="btn btn-primary" type="submit">
+        <i class="fa fa-plus"></i> Nueva orden de compra
+      </button>
+    </form>
+  <?php endif; ?>
+</div>
+<?php if (!empty($_GET['err']) && $_GET['err']==='rfc'): ?>
+  <div class="alert alert-err">RFC inválido o faltante.</div>
+<?php endif; ?>
   <div class="card">
     <h2>Órdenes de compra</h2>
     <table class="tbl">
@@ -69,6 +91,15 @@ $stmt->close();
           </td>
           <td>
             <a class="btn btn-outline" href="oc_ver.php?oc_id=<?= (int)$oc['id'] ?>"><i class="fa fa-eye"></i> Ver</a>
+            <?php if (strtoupper($oc['estatus']) !== 'CANCELADA' && (($_SESSION['user_externo'] ?? 'N') !== 'S')): ?>
+              <form method="post" action="oc_cancelar.php" class="inline"
+                    onsubmit="return confirm('¿Cancelar la OC #<?= (int)$oc['id'] ?>? Se desasociarán sus facturas.');">
+                <input type="hidden" name="oc_id" value="<?= (int)$oc['id'] ?>">
+                <button type="submit" class="btn btn-danger">
+                  <i class="fa fa-ban"></i> Cancelar
+                </button>
+              </form>
+            <?php endif; ?>
           </td>
         </tr>
       <?php endforeach; endif; ?>
