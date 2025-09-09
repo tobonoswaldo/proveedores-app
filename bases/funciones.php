@@ -533,4 +533,57 @@ function actualizar_estatus_oc(mysqli $conn, int $oc_id, float $tolerancia = 0.0
     $stmt->close();
 }
 
+function filtroExterno(string $campo = 'rfc', string $prefix = 'where'): array {
+    if (session_status() === PHP_SESSION_NONE) { session_start(); }
+    $esExterno = ($_SESSION['user_externo'] ?? 'N') === 'S';
+    $rfc       = $_SESSION['user_rfc'] ?? '';
+    if ($esExterno && $rfc !== '') {
+        $whereExterno = " {$prefix} {$campo} = '" . addslashes($rfc) . "'";
+        $privilegio   = 'N';
+    } else {
+        $whereExterno = '';
+        $privilegio   = 'S';
+    }
+    return [$whereExterno, $privilegio];
+}
+function filtroExternoWhere(string $campo = 'rfc'): array { return filtroExterno($campo, 'where'); }
+function filtroExternoAnd(string $campo = 'rfc'): array   { return filtroExterno($campo, 'and'); }
+
+// -------------------------------------------------------------
+// Filtro para usuarios EXTERNOS (versión segura p/ consultas preparadas)
+// Devuelve:
+//  - clause_where: " WHERE <campo> = ?"   (o "")
+//  - clause_and:   " AND <campo> = ?"     (o "")
+//  - params:       array con valores para bind_param
+//  - types:        string de tipos (ej. "s")
+//  - privilegio:   "N" si externo, "S" si interno
+// -------------------------------------------------------------
+if (!function_exists('getFiltroExternoSeguro')) {
+    function getFiltroExternoSeguro(string $campo = 'rfc'): array {
+        if (session_status() === PHP_SESSION_NONE) { session_start(); }
+
+        $esExterno = (($_SESSION['user_externo'] ?? 'N') === 'S');
+        // Por compatibilidad: si no hay user_rfc, tomamos user_username
+        $rfc = $_SESSION['user_rfc'] ?? $_SESSION['user_username'] ?? '';
+
+        if ($esExterno && $rfc !== '') {
+            return [
+                'clause_where' => " WHERE {$campo} = ?",
+                'clause_and'   => " AND {$campo} = ?",
+                'params'       => [$rfc],
+                'types'        => "s",
+                'privilegio'   => "N",
+            ];
+        }
+
+        return [
+            'clause_where' => "",
+            'clause_and'   => "",
+            'params'       => [],
+            'types'        => "",
+            'privilegio'   => "S",
+        ];
+    }
+}
+
 ?>

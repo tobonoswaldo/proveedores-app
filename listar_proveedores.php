@@ -1,6 +1,7 @@
 <?php
 session_start();
 include 'config.php';
+require_once __DIR__.'/bases/funciones.php';
 
 // 🚀 Validación de sesión
 if (!isset($_SESSION['usuario'])) {
@@ -8,11 +9,13 @@ if (!isset($_SESSION['usuario'])) {
     exit();
 }
 
+list($whereExterno, $privilegio) = filtroExternoWhere('rfc');
+
 // Consulta de proveedores
 $sql = "SELECT id, nombre, rfc, telefono, email, direccion,
                constancia_pdf, ine_pdf, acta_pdf, ine_representante_pdf,
                banco_pdf, domicilio_pdf
-        FROM proveedores";
+        FROM proveedores {$whereExterno} ";
 $result = $conn->query($sql);
 ?>
 <!DOCTYPE html>
@@ -29,11 +32,12 @@ $result = $conn->query($sql);
         <div class="form-header">
             <i class="fa fa-list"></i> Listado de Proveedores
         </div>
-
-        <!-- Botón nuevo proveedor -->
-        <div style="margin-bottom:15px; text-align:left;">
-            <a href="proveedores.php" class="btn-nuevo"><i class="fa fa-plus"></i> Nuevo Proveedor</a>
-        </div>
+        <?php if($privilegio == 'S'){ ?>
+                    <!-- Botón nuevo proveedor -->
+                    <div style="margin-bottom:15px; text-align:left;">
+                        <a href="proveedores.php" class="btn-nuevo"><i class="fa fa-plus"></i> Nuevo Proveedor</a>
+                    </div>
+        <?php } ?>
 
         <table class="table-proveedores">
             <thead>

@@ -1,12 +1,20 @@
 <?php
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 session_start();
 include __DIR__ . '/../config.php';
+require_once __DIR__.'/../bases/funciones.php';
+list($whereExterno, $privilegio) = filtroExternoWhere('emisor_rfc');
 
 if (!isset($_SESSION['usuario'])) { header("Location: ../login.php"); exit(); }
 
 $sql = "SELECT id, uuid, emisor_rfc, receptor_rfc, fecha, total, xml_path, pdf_path
-        FROM facturas_cxp ORDER BY fecha DESC, id DESC";
+        FROM facturas_cxp {$whereExterno}
+        ORDER BY fecha DESC, id DESC";
 $res = $conn->query($sql);
+
 ?>
 <!DOCTYPE html>
 <html lang="es">

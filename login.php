@@ -1,6 +1,7 @@
 <?php
 session_start();
 include 'config.php';
+$error = null;
 
 // 🚀 Si ya existe sesión activa → redirigir al dashboard
 if (isset($_SESSION['usuario'])) {
@@ -9,23 +10,37 @@ if (isset($_SESSION['usuario'])) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    $username = trim($_POST['username'] ?? '');
+    $password = (string)($_POST['password'] ?? '');
 
-    // Validación con PASSWORD() en SQL
-    $sql = "SELECT id, nombre FROM usuarios WHERE username=? AND password=PASSWORD(?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ss", $username, $password);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result->num_rows == 1) {
-        $user = $result->fetch_assoc();
-        $_SESSION['usuario'] = $user['nombre'];
-        header("Location: dashboard.php");
-        exit();
+    if ($username === '' || $password === '') {
+        $error = 'Usuario y contraseña requeridos';
     } else {
-        $error = "Usuario o contraseña incorrectos";
+        // Validación con PASSWORD() en SQL
+        $sql = "SELECT id, username, nombre, email, externo FROM usuarios WHERE username=? AND password=PASSWORD(?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ss", $username, $password);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows == 1) {
+            $user = $result->fetch_assoc();
+            // Variables clásicas que ya usabas
+            $_SESSION['usuario'] = $user['nombre'];
+
+            // Variables nuevas para control de acceso global
+            $_SESSION['user_id']       = (int)$user['id'];
+            $_SESSION['user_nombre']   = $user['nombre'];
+            $_SESSION['user_username'] = $user['username'];   // == RFC si así lo definiste
+            $_SESSION['user_externo']  = $user['externo'];    // 'S' / 'N'
+            $_SESSION['user_rfc']      = $user['username'];   // alias directo
+
+            header("Location: dashboard.php");
+            exit();
+        } else {
+            $error = "Usuario o contraseña incorrectos";
+        }
+        $stmt->close();
     }
 }
 ?>

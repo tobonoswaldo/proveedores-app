@@ -180,13 +180,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['guardar'])) {
         <!-- ===== Datos principales ===== -->
         <div class="input-group">
             <i class="fa fa-building"></i>
-            <input type="text" name="nombre" placeholder="Nombre del proveedor" required
+            <input type="text" name="nombre" placeholder="Nombre del proveedor" <?= !empty($modoEdicion) ? 'readonly' : '' ?>
+ required
                    value="<?php echo htmlspecialchars($nombre); ?>">
         </div>
 
         <div class="input-group">
             <i class="fa fa-id-card"></i>
-            <input type="text" name="rfc" placeholder="RFC" required maxlength="13"
+            <input type="text" name="rfc" placeholder="RFC" <?= !empty($modoEdicion) ? 'readonly' : '' ?>
+ required maxlength="13"
                    pattern="^[A-ZÑ&]{3,4}\d{6}[A-Z0-9]{2,3}$"
                    value="<?php echo htmlspecialchars($rfc); ?>">
         </div>

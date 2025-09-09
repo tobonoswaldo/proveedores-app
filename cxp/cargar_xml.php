@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 /* ============================================================================
  *  CXP | cargar_xml.php
  *  - Sube XML CFDI, prelee y valida (RFC/UUID y usuarios externos)
@@ -9,6 +12,8 @@
 
 session_start();
 require_once __DIR__ . '/../config.php';
+require_once __DIR__ . '/../includes/auth.php';
+requireLogin();
 require_once __DIR__ . '/../bases/funciones.php';
 
 if (!isset($_SESSION['usuario'])) {
@@ -24,6 +29,17 @@ $msg = null;               // Mensaje de estado para el usuario
  *  PASO 1: SUBIR Y LEER XML
  * ============================================================================ */
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['subirXml'])) {
+/*
+    // Aquí solo reforzamos el candado para externos:
+    if (isExterno()) {
+        $rfcUsuario = strtoupper((string)currentRFC());
+        $rfcEmisor  = strtoupper((string)($data['emisor_rfc'] ?? ''));
+        if ($rfcEmisor === '' || $rfcEmisor !== $rfcUsuario) {
+            http_response_code(403);
+            exit('No autorizado: el RFC('.$rfcEmisor.') emisor del CFDI no coincide con su usuario('.$rfcUsuario.').');
+        }
+    }
+*/
     $res = cfdi_cargar_y_guardar($_FILES['xml_cfdi'] ?? []);
 
     if (!$res['ok']) {
