@@ -2,7 +2,7 @@
 /* ============================================================================
  *  CXP | cargar_xml.php
  *  - Sube XML CFDI, prelee y valida (RFC/UUID y usuarios externos)
- *  - Guarda archivos en /proveedores-app/cxp/documentos/<RFC>/<UUID>.(xml|pdf)
+ *  - Guarda archivos en /template/cxp/documentos/<RFC>/<UUID>.(xml|pdf)
  *  - Precarga TODOS los datos (incluye impuestos) y permite guardar en BD
  *  - Redirige a listar_facturas.php al finalizar
  * ============================================================================ */
@@ -89,8 +89,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['guardarFactura'])) {
     $data = [];
     foreach ($campos as $c) $data[$c] = trim($_POST[$c] ?? '');
 
-    // --- Normalización de xml_path a ruta web-relativa (/proveedores-app/cxp/documentos/...) ---
-    $appBase = rtrim($GLOBALS['APP_WEB_BASE'] ?? '/proveedores-app', '/');
+    // --- Normalización de xml_path a ruta web-relativa (/template/cxp/documentos/...) ---
+    $appBase = rtrim($GLOBALS['APP_WEB_BASE'] ?? '/template', '/');
     $docroot = rtrim($_SERVER['DOCUMENT_ROOT'] ?? '', '/');
 
     if (!empty($data['xml_path'])) {
@@ -101,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['guardarFactura'])) {
         if ($docroot && strpos($data['xml_path'], $docroot) === 0) {
             $data['xml_path'] = substr($data['xml_path'], strlen($docroot));
         }
-        // Si comienza con /cxp/documentos, prefijar con /proveedores-app
+        // Si comienza con /cxp/documentos, prefijar con /template
         if (strpos($data['xml_path'], $appBase.'/cxp/documentos/') !== 0) {
             if (strpos($data['xml_path'], '/cxp/documentos/') === 0) {
                 $data['xml_path'] = $appBase . $data['xml_path'];

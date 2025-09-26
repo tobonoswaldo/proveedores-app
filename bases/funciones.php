@@ -160,21 +160,21 @@ function crear_usuario(
 
 /* ========= BASE WEB de tu app (ajústala si cambias carpeta) ========= */
 if (!isset($GLOBALS['APP_WEB_BASE'])) {
-    // Tu app corre en http://localhost/proveedores-app
-    $GLOBALS['APP_WEB_BASE'] = '/proveedores-app'; // sin slash final
+    // Tu app corre en http://localhost/template
+    $GLOBALS['APP_WEB_BASE'] = '/template'; // sin slash final
 }
 
 /* ========= Paths CxP ========= */
 
 /** Directorio ABSOLUTO donde se guardan documentos */
 function cxp_base_dir(): string {
-    // .../proveedores-app/cxp/documentos/
+    // .../template/cxp/documentos/
     return rtrim(realpath(__DIR__ . '/..'), '/') . '/cxp/documentos/';
 }
 
 /** Prefijo WEB-relativo (lo que va a BD y a los links) */
 function cxp_public_rel_base(): string {
-    return rtrim($GLOBALS['APP_WEB_BASE'] ?? '/proveedores-app', '/') . '/cxp/documentos/';
+    return rtrim($GLOBALS['APP_WEB_BASE'] ?? '/template', '/') . '/cxp/documentos/';
 }
 
 /** Parsea un CFDI desde un archivo */
@@ -461,14 +461,14 @@ function cxp_dir_por_rfc(string $rfc): string {
     return $dest; // ABS
 }
 
-/** Construye ruta WEB-relativa para BD: /proveedores-app/cxp/documentos/RFC/archivo */
+/** Construye ruta WEB-relativa para BD: /template/cxp/documentos/RFC/archivo */
 function cxp_public_rel_path(string $rfc, string $filename): string {
     return rtrim(cxp_public_rel_base(), '/') . '/' . strtoupper(trim($rfc)) . '/' . $filename;
 }
 
 /** Convierte ruta REL (BD) → ABS (disco) */
 function cxp_abs_from_rel(string $rel): ?string {
-    $prefix = cxp_public_rel_base(); // /proveedores-app/cxp/documentos/
+    $prefix = cxp_public_rel_base(); // /template/cxp/documentos/
     if (strpos($rel, $prefix) !== 0) return null;
     $tail = substr($rel, strlen($prefix)); // RFC/archivo
     return cxp_base_dir() . $tail;         // ABS
@@ -611,7 +611,7 @@ function sql_with_params(mysqli $conn, string $sql, string $types, ...$params): 
     return $sql;
 }
 
-// Ruta base de la app (p. ej. /proveedores-app/ o /receptor/)
+// Ruta base de la app (p. ej. /template/ o /receptor/)
 $BASE_URL = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/') . '/';
 
 function asset($rel) {
