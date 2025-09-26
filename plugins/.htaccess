@@ -1,0 +1,12 @@
+# Evita mostrar el listado de archivos
+Options -Indexes
+
+# Define el archivo por defecto al entrar a la carpeta
+DirectoryIndex login.php
+
+# Opcional: redirigir automáticamente al login si alguien entra a la raíz
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_URI} ^/?$ 
+    RewriteRule ^(.*)$ login.php [L,R=302]
+</IfModule>

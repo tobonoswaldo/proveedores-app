@@ -1,0 +1,420 @@
+/* ===========================
+   THEME FINAL — Oswaldo Tobón
+   =========================== */
+:root {
+  --brand-blue: rgb(32,45,68);  /* #202D44 */
+  --brand-blue-contrast: #ffffff;
+  --surface-gray: #B5B5B5;      /* gris */
+  --surface-blue: #00ACD9;      /* azul claro*/
+  --surface-white: #ffffff;
+  --text-dark: #212529;
+  --link: #9ec5ff;
+  --link-hover: #cfe2ff;
+}
+
+/* ===== Fondos en gris (login y dashboard) ===== */
+html, body { background-color: var(--surface-gray) !important; color: var(--text-dark); }
+.content-wrapper { background-color: var(--surface-gray) !important; color: var(--text-dark); }
+
+/* ===== Menús en azul (header + sidebar) ===== */
+.main-header, .main-header .navbar, .main-footer {
+  background-color: var(--surface-gray) !important;
+  color: var(--text-dark) !important;
+}
+/* Mantener header claro, pero nav-links pueden heredar azul si se desea */
+.navbar-nav .nav-link { color: var(--text-dark) !important; }
+
+/* Sidebar y brand en azul */
+.main-sidebar, .brand-link {
+  background-color: var(--brand-blue) !important;
+  color: var(--brand-blue-contrast) !important;
+}
+.brand-text, .sidebar a { color: var(--brand-blue-contrast) !important; }
+.nav-sidebar > .nav-item > .nav-link.active {
+  background-color: rgba(255,255,255,.12) !important;
+  color: #fff !important;
+}
+.nav-sidebar .nav-link { color: var(--brand-blue-contrast) !important; }
+.nav-sidebar .nav-link:hover { background-color: rgba(255,255,255,.08) !important; }
+
+/* ===== Cuadro de login en azul ===== */
+body.login-page { background-color: var(--surface-gray) !important; } /* fondo gris */
+.login-box .card, .login-box .card-body {
+  background-color: var(--brand-blue) !important;
+  color: var(--brand-blue-contrast) !important;
+  border: none !important;
+  box-shadow: 0 10px 25px rgba(0,0,0,.25) !important;
+}
+.login-box a { color: var(--link) !important; }
+.login-box a:hover { color: var(--link-hover) !important; }
+
+/* Inputs del login: blancos para legibilidad */
+.login-box .form-control, .login-box .input-group-text {
+  background-color: #fff !important;
+  color: #111 !important;
+  border-color: #d1d5db !important;
+}
+.login-box ::placeholder { color: #6b7280 !important; }
+
+/* ===== Componentes de contenido (cards, tablas, modales) ===== */
+.card, .card-body, .small-box,
+.modal-content, .dropdown-menu,
+.table, .table tbody tr, .table thead th {
+  background-color: var(--surface-white) !important;
+  color: var(--text-dark) !important;
+}
+
+/* Formularios generales */
+.form-control, .custom-select, .input-group-text {
+  background-color: #fff !important;
+  color: #111 !important;
+  border-color: #d1d5db !important;
+}
+
+/* Botones alineados a la marca */
+.btn-primary, .btn-outline-primary:hover {
+  background-color: var(--surface-blue) !important;
+  border-color: var(--surface-blue) !important;
+  color: #fff !important;
+}
+.btn-outline-primary {
+  color: var(--brand-blue) !important;
+  border-color: var(--brand-blue) !important;
+  background-color: transparent !important;
+}
+
+/* Enlaces */
+a { color: var(--link); }
+a:hover { color: var(--link-hover); }
+
+/* Quitar gradientes de bg-* que choquen */
+[class*="bg-"] { background-image: none !important; }
+
+:root{
+  --surface-gray: #b5b5b5; /* gris del dashboard/login */
+  --text-dark:  #212529;
+}
+
+/* Fondo gris también en login */
+html, body,
+body.login-page {
+  background-color: var(--surface-gray) !important;
+  color: var(--text-dark);
+}
+
+/* El recuadro de login puede quedar blanco o el color que prefieras */
+.login-box .card, .login-box .card-body {
+  background-color: #ffffff !important;  /* cambia a tu gusto */
+  color: var(--text-dark) !important;
+}
+
+/* Breadcrumb en blanco */
+.content-header .breadcrumb,
+.content-header .breadcrumb .breadcrumb-item,
+.content-header .breadcrumb .breadcrumb-item a {
+  color: #fff !important;
+}
+
+/* Separador “/” en claro */
+.content-header .breadcrumb .breadcrumb-item + .breadcrumb-item::before {
+  color: rgba(255,255,255,.85) !important;
+}
+
+/* Hover legible */
+.content-header .breadcrumb .breadcrumb-item a:hover {
+  color: #e6e6e6 !important;
+}
+
+/* (Opcional) header con fondo azul para contraste */
+.content-header {
+  background-color: var(--surface-gray); 
+  border-bottom: none;
+}
+
+/* Título grande y blanco en el header */
+.content-header .page-title {
+  color: #fff !important;
+  font-size: 1.2rem;   /* ajusta a tu gusto */
+  line-height: 1.2;
+  margin: 0;           /* igual que .m-0 de AdminLTE */
+  font-weight: 600;
+}
+
+/* Breadcrumb en blanco (si aún no lo tienes) */
+.content-header .breadcrumb,
+.content-header .breadcrumb .breadcrumb-item,
+.content-header .breadcrumb .breadcrumb-item a {
+  color: #fff !important;
+}
+.content-header .breadcrumb .breadcrumb-item + .breadcrumb-item::before {
+  color: rgba(255,255,255,.85) !important;
+}
+
+/* ===== Footer corporativo ===== */
+.main-footer {
+  background-color: #202D44 !important; /* tu azul */
+  color: #fff !important;
+  border-top: none !important;
+  padding: .75rem 1rem;
+  font-size: .95rem;
+}
+.main-footer a { color: #9ec5ff !important; }
+.main-footer a:hover { color: #cfe2ff !important; }
+
+/* (Opcional) Sticky footer cuando hay poco contenido */
+html, body { height: 100%; }
+.wrapper { min-height: 100vh; display: flex; flex-direction: column; }
+.content-wrapper { flex: 1 0 auto; }
+.main-footer { flex-shrink: 0; }
+
+/* === Header azul igual que el footer === */
+:root { --brand-blue: #202D44; }
+
+.main-header {
+  background-color: var(--brand-blue) !important;
+  color: #fff !important;
+  border-bottom: none !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,.12);
+}
+
+/* Enlaces e íconos del header en blanco */
+.main-header .nav-link,
+.main-header .navbar-nav .nav-link,
+.main-header .navbar-nav .nav-item > a,
+.main-header .fas, .main-header .fa, .main-header .far {
+  color: #fff !important;
+}
+
+.main-header .nav-link:hover,
+.main-header .navbar-nav .nav-link:hover {
+  color: #cfe2ff !important;
+}
+
+/* Dropdowns legibles sobre header azul */
+.main-header .dropdown-menu {
+  background: #fff !important;
+  color: #212529 !important;
+  border: 1px solid rgba(0,0,0,.08) !important;
+}
+.main-header .dropdown-item { color: #212529 !important; }
+.main-header .dropdown-item:hover { background: #f2f4f7 !important; }
+
+/* Evitar que clases claras pisen el azul */
+.navbar-white, .navbar-light { background-color: transparent !important; color: inherit !important; }
+
+/* Header fijo en layout-fixed (opcional) */
+.layout-fixed .main-header { position: sticky; top: 0; z-index: 1030; }
+
+/* Bloque de bienvenida */
+.welcome-block {
+  text-align: center;
+  margin: 1rem 0 2rem;
+}
+
+/* Título "Bienvenido ..." */
+.welcome-title {
+  color: #fff !important;
+  font-size: 1.7rem;   /* ajusta a gusto */
+  line-height: 1.2;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Fecha y hora */
+.welcome-meta {
+  color: #fff !important;        /* blanco */
+  font-size: 1.3rem;               /* más pequeño que el título */
+  line-height: 1.7;
+  margin-top: .35rem;
+  opacity: .92;                  /* opcional, un toque más suave */
+}
+
+/* Por si usas .text-muted en ese bloque, forzamos blanco */
+.welcome-block .text-muted { color: #fff !important; opacity: .92; }
+
+/* Tablas más pulidas */
+#app-content .table thead th { font-weight: 600; }
+#app-content .badge.badge-secondary { background: #e5e7eb; color: #111; }
+
+/* Cards con esquinas suaves */
+#app-content .card { border-radius: .7rem; }
+#app-content .card-header { border-bottom: 1px solid rgba(0,0,0,.08); }
+
+/* Input search compacto pero legible */
+#app-content .form-inline .form-control { min-width: 260px; }
+
+/* ===== Proveedores: tamaños y colores forzados ===== */
+
+/* Encabezados */
+#tabla-proveedores thead th {
+  background-color: var(--surface-blue) !important;
+  color: #fff !important;
+  border-color: rgba(255,255,255,.25) !important;
+  font-size: 1.05rem !important;        /* tamaño encabezado */
+  line-height: 1.35 !important;
+  vertical-align: middle;
+}
+
+/* Cuerpo */
+#tabla-proveedores tbody td,
+#tabla-proveedores tbody a,
+#tabla-proveedores tbody i,
+#tabla-proveedores .badge {
+  font-size: 0.80rem !important;         /* tamaño celdas */
+  line-height: 1.45 !important;
+  color: #fff !important;                /* texto blanco */
+}
+
+#tabla-proveedores tbody tr {            /* fondo gris del cuerpo */
+  background-color: #3f4a52 !important;
+}
+#tabla-proveedores tbody tr:nth-child(even) {
+  background-color: #454f58 !important;
+}
+#tabla-proveedores tbody tr:hover {
+  background-color: #51606a !important;
+}
+
+/* Bordes claros */
+#tabla-proveedores tbody td {
+  border-color: rgba(255,255,255,.12) !important;
+}
+
+/* Neutralizar estilos globales que molesten */
+.table thead th { background-color: transparent; color: inherit; }
+
+/* ===== Título del listado (solo en Proveedores) ===== */
+:root { --prov-header-size: 1.15rem; } /* ajusta a gusto */
+
+.mod-proveedores .form-header {
+  color: #fff !important;                        /* texto blanco */
+  font-size: var(--prov-header-size) !important; /* tamaño editable */
+  line-height: 1.3;
+  font-weight: 500;
+  display: inline-flex;                           /* evita que herede display raro */
+  align-items: center;
+  gap: .5rem;
+  margin: .25rem 0 1rem;
+  opacity: 1 !important;                          /* por si algo lo dejaba gris/transparente */
+}
+
+.mod-proveedores .form-header i,
+.mod-proveedores .form-header .fa,
+.mod-proveedores .form-header .fas {
+  color: #fff !important;                         /* icono blanco */
+  display: inline-block !important;
+  font-size: calc(var(--prov-header-size) * 1.1) !important;
+}
+
+/* (Opcional) presets rápidos por clase en el wrapper */
+.mod-proveedores.prov-h-sm { --prov-header-size: 1.00rem; }
+.mod-proveedores.prov-h-md { --prov-header-size: 1.15rem; }
+.mod-proveedores.prov-h-lg { --prov-header-size: 1.30rem; }
+
+/* ====== Vista EDITAR proveedor (scopeada) ====== */
+.view-edit .edit-proveedor{
+  max-width: 720px;              /* centrado */
+  margin: 0 auto 2rem;
+  --edit-font: 1rem;             /* tamaño base editable */
+  font-size: var(--edit-font);
+  color: #fff !important;        /* texto blanco */
+}
+
+/* Título + ícono en blanco */
+.view-edit .edit-title{
+  display:flex; align-items:center; gap:.6rem;
+  color:#fff !important; font-weight:600;
+  font-size: calc(var(--edit-font) * 1.25);
+  margin: 0 0 1rem;
+}
+.view-edit .edit-title .fa,
+.view-edit .edit-title .fas{ color:#fff !important; }
+
+/* Labels, ayudas, links e íconos: blancos */
+.view-edit label,
+.view-edit .form-text,
+.view-edit a,
+.view-edit .input-group-text,
+.view-edit .input-group-text .fa,
+.view-edit .input-group-text .fas{ color:#fff !important; }
+
+/* Inputs: no cambiamos tu skin global, solo tamaño y enfoque */
+.view-edit .form-control{ font-size: inherit; }
+.view-edit .form-control:focus{
+  box-shadow: 0 0 0 .2rem rgba(0,172,217,.25) !important;
+  border-color: #00ACD9 !important;
+}
+
+/* Botones */
+.view-edit .btn-primary{
+  background:#00ACD9 !important; border-color:#00ACD9 !important; color:#fff !important;
+}
+
+/* Presets de tamaño del formulario */
+.view-edit .edit-proveedor.size-sm{ --edit-font: .95rem; }
+.view-edit .edit-proveedor.size-md{ --edit-font: 1.00rem; }
+.view-edit .edit-proveedor.size-lg{ --edit-font: 1.12rem; }
+
+/* --- Panel gris igual al del listado --- */
+.view-edit .form-container{
+  /* si ya lo tienes en tu CSS, esto solo lo asegura */
+  width: 95%;
+  max-width: 1400px;
+  margin: 0 auto 2rem;           /* centrado horizontal */
+  background: #444F57;           /* gris claro como el contenedor del listado */
+  border-radius: 6px;
+  padding: 20px;
+}
+
+/* --- Bloque del formulario centrado dentro del panel --- */
+.view-edit .edit-proveedor{
+  max-width: 720px;              /* ancho cómodo del form */
+  margin: 0 auto;                /* centrado */
+  --edit-font: 1rem;             /* tamaño base editable */
+  font-size: var(--edit-font);
+  color: #fff !important;        /* textos en blanco */
+}
+
+/* Título e ícono en blanco */
+.view-edit .edit-title{
+  display:flex; align-items:center; gap:.6rem;
+  color:#fff !important; font-weight:600;
+  font-size: calc(var(--edit-font) * 1.25);
+  margin: 0 0 1rem;
+}
+.view-edit .edit-title .fa, .view-edit .edit-title .fas{ color:#fff !important; }
+
+/* Labels/ayudas/íconos de input-group también en blanco */
+.view-edit label, .view-edit .form-text, .view-edit a{ color:#fff !important; }
+.view-edit .input-group-text,
+.view-edit .input-group-text .fa, .view-edit .input-group-text .fas{ color:#fff !important; }
+
+/* Inputs: respeta tu skin, solo tamaño y focus */
+.view-edit .form-control{ font-size: inherit; }
+.view-edit .form-control:focus{
+  box-shadow: 0 0 0 .2rem rgba(0,172,217,.25) !important;
+  border-color: #00ACD9 !important;
+}
+
+/* Botones */
+.view-edit .btn-primary{ background:#00ACD9 !important; border-color:#00ACD9 !important; color:#fff !important; }
+
+/* Presets de tamaño del formulario */
+.view-edit .edit-proveedor.size-sm{ --edit-font: .95rem; }
+.view-edit .edit-proveedor.size-md{ --edit-font: 1.00rem; }
+.view-edit .edit-proveedor.size-lg{ --edit-font: 1.12rem; }
+
+/* Fila de 3 columnas: icono | etiqueta | input (solo en EDITAR) */
+.view-edit .triple-row { align-items: center; margin-bottom: .75rem; }
+.view-edit .triple-row .icon {
+  width: 32px; text-align: center; color: #fff;  /* icono blanco */
+}
+.view-edit .triple-row label { color: #fff !important; margin-bottom: 0; }
+.view-edit .triple-row .form-control,
+.view-edit .triple-row .custom-file-label { font-size: inherit; }
+
+/* Ajustes móviles: apila etiqueta e input, deja icono arriba */
+@media (max-width: 576px) {
+  .view-edit .triple-row .icon { margin-bottom: .25rem; }
+  .view-edit .triple-row label { margin-bottom: .25rem; }
+}

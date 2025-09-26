@@ -586,4 +586,41 @@ if (!function_exists('getFiltroExternoSeguro')) {
     }
 }
 
+// Helper para ver la SQL final (copia/pega en MySQL)
+function sql_with_params(mysqli $conn, string $sql, string $types, ...$params): string {
+    $i = 0;
+    foreach (str_split($types) as $t) {
+        $v = $params[$i++];
+        if ($v === null) {
+            $rep = "NULL";
+        } else {
+            switch ($t) {
+                case 'i': // integer
+                case 'd': // double
+                    $rep = (string)$v;
+                    break;
+                case 's': // string
+                case 'b': // blob (lo tratamos como string para debug)
+                default:
+                    $rep = "'" . $conn->real_escape_string((string)$v) . "'";
+            }
+        }
+        // Sustituye solo el PRIMER ? que quede
+        $sql = preg_replace('/\?/', $rep, $sql, 1);
+    }
+    return $sql;
+}
+
+// Ruta base de la app (p. ej. /proveedores-app/ o /receptor/)
+$BASE_URL = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/') . '/';
+
+function asset($rel) {
+  global $BASE_URL;
+  return $BASE_URL . ltrim($rel, '/');
+}
+
+function safe_status(int $code): void {
+    if (!headers_sent()) { http_response_code($code); }
+}
+
 ?>
