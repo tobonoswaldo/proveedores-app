@@ -1,22 +1,30 @@
-# App
-config.php
-*.env
-.env.*
-/cxp/documentos/
-/vendor/
-/node_modules/
-/tmp/
-/cache/
-/logs/
+// System / Log files 
+*.DS_Store
+*.log
 
-# SO / IDE
-.DS_Store
-Thumbs.db
-*.swp
-.idea/
-.vscode/
-
-# Backups/archivos grandes
-*.bak
+// Archives
 *.zip
-*.tar.gz
+
+// Sass Cache
+.sass-cache
+
+// Project files
+.idea
+nbproject
+nbproject/private
+.vscode/
+.vs/
+
+// Node / Bower
+node_modules/
+bower_components/
+
+// Docs
+docs/_site
+.jekyll-cache/
+.jekyll-metadata
+
+// ETC
+TODO
+test.html
+ad.js
